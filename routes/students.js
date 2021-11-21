@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const debug = require('debug')('monprojetdemo:api:student');
-const { Student } = require('../models/student_model');
+const { Student } = require('../models/students');
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
