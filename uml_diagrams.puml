@@ -1,0 +1,38 @@
+@startuml class_diagram
+class Student {
+    -id
+    -firstName
+    -lastName
+}
+
+class Class {
+    -id
+    -academicYear
+    -shortName
+    +subscribe(student)
+    +addTeachingPeriod(teachingPeriod)
+}
+
+class TeachingPeriod {
+    -id
+    -beginning : Date
+    -end : Date
+}
+
+class EducationUnit {
+    -id
+    -name
+}
+
+class Teacher {
+    -id
+    -firstName
+    -lastName
+}
+
+Student <--o Class
+Class --> Teacher
+EducationUnit <-- Class
+Class o--> TeachingPeriod
+
+@enduml

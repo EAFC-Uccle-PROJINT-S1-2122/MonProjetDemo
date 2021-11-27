@@ -18,7 +18,9 @@
 			"database": "postgres",
 			"username": "postgres",
 			"password": "postgres"
-		}]
+		}],
+		"plantuml.server": "http://plantuml:8080",
+		"plantuml.render": "PlantUMLServer"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
