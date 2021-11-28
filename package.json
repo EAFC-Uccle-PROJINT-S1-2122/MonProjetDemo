@@ -7,6 +7,7 @@
     "dev": "DEBUG=monprojetdemo:* NODE_ENV=development nodemon ./bin/www",
     "create_database": "DEBUG=monprojetdemo:* node ./models/create_database.js",
     "create_tables": "DEBUG=monprojetdemo:* node ./models/create_tables.js",
+    "drop_tables": "DEBUG=monprojetdemo:* node ./models/drop_tables.js",
     "import_samples": "DEBUG=monprojetdemo:* node ./models/import_samples.js"
   },
   "dependencies": {
