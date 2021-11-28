@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       args:
@@ -13,14 +13,14 @@ services:
 
     environment:
       DB_HOSTNAME: db
-      DB_DBNAME: postgres
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      DB_DIALECT: postgres
+      DB_DBNAME: mariadb
+      DB_USERNAME: mariadb
+      DB_PASSWORD: mariadb
+      DB_DIALECT: mariadb
 
     volumes:
       - ..:/workspace:cached
-      
+
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
@@ -30,18 +30,19 @@ services:
     # Uncomment the next line to use a non-root user for all processes.
     # user: node
 
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: postgres:latest
+    image: mariadb:latest
     restart: unless-stopped
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - mariadb-data:/var/lib/mysql
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
+      MARIADB_RANDOM_ROOT_PASSWORD: yes
+      MARIADB_PASSWORD: mariadb
+      MARIADB_USER: mariadb
+      MARIADB_DATABASE: mariadb
 
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
@@ -50,4 +51,4 @@ services:
     image: plantuml/plantuml-server:jetty
 
 volumes:
-  postgres-data:
+  mariadb-data:
