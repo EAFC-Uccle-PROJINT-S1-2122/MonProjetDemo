@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 const db_hostname = process.env.DB_HOSTNAME || 'localhost';
 const db_dbname = process.env.DB_DBNAME || 'studentdb';
@@ -11,17 +11,4 @@ const sequelize = new Sequelize(db_dbname, db_username, db_password, {
     dialect: db_dialect
 });
 
-class Student extends Model {}
-
-Student.init({
-    firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, { sequelize, modelName: "student" });
-
-module.exports = { sequelize, Student };
+module.exports = sequelize;

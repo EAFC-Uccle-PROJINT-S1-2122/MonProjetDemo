@@ -15,8 +15,9 @@ class Class {
 
 class TeachingPeriod {
     -id
-    -beginning : Date
-    -end : Date
+    -date
+    -beginning
+    -end
 }
 
 class EducationUnit {

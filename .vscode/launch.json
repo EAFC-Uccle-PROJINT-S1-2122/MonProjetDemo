@@ -10,7 +10,23 @@
       "name": "express server",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/bin/www",
-      "env": { 
+      "env": {
+        "DEBUG": "monprojetdemo:*",
+        "NODE_ENV": "development"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "populate db",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "/usr/local/bin/npm",
+      "args": [
+        "run",
+        "import_samples"
+      ],
+      "env": {
         "DEBUG": "monprojetdemo:*",
         "NODE_ENV": "development"
       },
