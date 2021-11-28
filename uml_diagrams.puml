@@ -31,9 +31,9 @@ class Teacher {
     -lastName
 }
 
-Student <--o Class
-Class --> Teacher
-EducationUnit <-- Class
-Class o--> TeachingPeriod
+Student --o Class
+Class -- Teacher
+EducationUnit -- Class
+Class o-- TeachingPeriod
 
 @enduml
