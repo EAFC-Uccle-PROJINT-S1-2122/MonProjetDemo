@@ -1,7 +1,7 @@
 // Load all defined models
-require('./models/schema');
+require('./schema');
 
-const sequelize = require('./models/connection');
+const sequelize = require('./connection');
 
 (async () => {
   await sequelize.sync({ force: true });

@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "DEBUG=monprojetdemo:* NODE_ENV=development nodemon ./bin/www",
-    "create_database": "DEBUG=monprojetdemo:* node ./create_database.js",
-    "create_tables": "DEBUG=monprojetdemo:* node ./create_tables.js",
+    "create_database": "DEBUG=monprojetdemo:* node ./models/create_database.js",
+    "create_tables": "DEBUG=monprojetdemo:* node ./models/create_tables.js",
     "import_samples": "DEBUG=monprojetdemo:* node ./models/sample_data.js"
   },
   "dependencies": {
@@ -15,10 +15,9 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mariadb": "^2.5.5",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3-rc.0",
-    "pg": "^8.7.1",
-    "pg-hstore": "^2.3.4",
     "rotating-file-stream": "^3.0.1",
     "sequelize": "^6.12.0-alpha.1"
   },
