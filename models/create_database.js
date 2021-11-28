@@ -1,4 +1,4 @@
-const debug = require('debug')('monprojetdemo:create_database');
+const debug = require('debug')('monprojetdemo:schema');
 const mysql = require('mysql2');
 
 // create the connection to database

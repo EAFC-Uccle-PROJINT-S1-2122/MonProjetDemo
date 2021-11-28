@@ -1,5 +1,8 @@
-const { DataTypes, Model } = require('sequelize');
+const debug = require("debug")("monprojetdemo:schema");
 const connection = require('./connection');
+const { DataTypes, Model } = require('sequelize');
+
+debug("Defining EducationUnit model...");
 
 class EducationUnit extends Model {}
 
@@ -10,5 +13,7 @@ EducationUnit.init({
         unique: true
     }
 }, { sequelize: connection, modelName: "educationUnit", tableName: "education_units" });
+
+debug("EducationUnit model defined");
 
 module.exports = EducationUnit;

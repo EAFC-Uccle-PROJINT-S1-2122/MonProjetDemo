@@ -1,5 +1,8 @@
-const { DataTypes, Model } = require('sequelize');
+const debug = require("debug")("monprojetdemo:schema");
 const connection = require('./connection');
+const { DataTypes, Model } = require('sequelize');
+
+debug("Defining Student model...");
 
 class Student extends Model {}
 
@@ -13,5 +16,7 @@ Student.init({
         allowNull: false
     }
 }, { sequelize: connection, modelName: "student" });
+
+debug("Student model defined.");
 
 module.exports = Student;
