@@ -18,7 +18,7 @@ TeachingPeriod.init(
       allowNull: false,
     },
   },
-  { sequelize: connection, modelName: "teachingPeriod" }
+  { sequelize: connection, modelName: "teachingPeriod", tableName: "teaching_periods" }
 );
 
 module.exports = TeachingPeriod;

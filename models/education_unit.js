@@ -9,6 +9,6 @@ EducationUnit.init({
         allowNull: false,
         unique: true
     }
-}, { sequelize: connection, modelName: "educationUnit" });
+}, { sequelize: connection, modelName: "educationUnit", tableName: "education_units" });
 
 module.exports = EducationUnit;
