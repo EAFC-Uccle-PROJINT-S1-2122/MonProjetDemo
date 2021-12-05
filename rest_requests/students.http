@@ -1,9 +1,10 @@
 GET http://localhost:3000/students
+Content-Type: application/json
 
 ###
 
 POST http://localhost:3000/students
-content-type: application/json
+Content-Type: application/json
 
 {
     "firstName": "Hatim",
@@ -13,11 +14,14 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/students/2
+Content-Type: application/json
 
 ###
 
 GET http://localhost:3000/students/2/classes
+Content-Type: application/json
 
 ###
 
 DELETE http://localhost:3000/students/2
+Content-Type: application/json

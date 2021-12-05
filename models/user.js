@@ -2,24 +2,25 @@ const debug = require("debug")("monprojetdemo:schema");
 const connection = require("./connection");
 const { DataTypes, Model } = require("sequelize");
 
-debug("Defining Teacher model...");
+debug("Defining User model...");
 
-class Teacher extends Model {}
+class User extends Model {}
 
-Teacher.init(
+User.init(
   {
-    firstName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    lastName: {
+    passwordHash: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
-  { sequelize: connection, modelName: "teacher" }
+  { sequelize: connection, modelName: "user" }
 );
 
-debug("Teacher model defined.");
+debug("User model defined.");
 
-module.exports = Teacher;
+module.exports = User;

@@ -1,1 +1,9 @@
 GET http://localhost:3000/classes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiIgIiwiaWF0IjoxNjM4NzE3MTQwLCJleHAiOjE2Mzg4MDM1NDAsImF1ZCI6Ik1vblByb2pldERlbW8gQVBJIHVzZXJzIiwiaXNzIjoiTW9uUHJvamV0RGVtbyB0b2tlbiBzeXN0ZW0ifQ.I-1iKl4EE7clVORPOhJgAZ12xi5VWEJypWi3ib0Nfhc
+
+###
+
+GET http://localhost:3000/classes/
+Content-Type: application/json
+

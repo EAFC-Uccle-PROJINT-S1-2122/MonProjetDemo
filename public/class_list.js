@@ -27,6 +27,20 @@ function populateTable(classes) {
   tableBody.replaceChildren(...classRows);
 }
 
-fetch("/classes/")
-  .then((response) => response.json())
+const token = window.sessionStorage.getItem("token");
+if (token == null) {
+  window.location.assign("/login.html");
+}
+const headers = new Headers();
+headers.append("Content-Type", "application/json");
+headers.append("Authorization", "Bearer " + token);
+fetch("/classes/", { headers })
+  .then((response) => {
+    if (response.status == 401) {
+      window.sessionStorage.removeItem("token");
+      window.location.assign("/login.html");
+    } else {
+      return response.json();
+    }
+  })
   .then((classes) => populateTable(classes));

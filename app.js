@@ -6,12 +6,15 @@ const logger = require("morgan");
 const rfs = require("rotating-file-stream");
 const debug = require("debug")("monprojetdemo:config");
 const favicon = require("serve-favicon");
+const passport = require("passport");
+const { Strategy, ExtractJwt } = require("passport-jwt");
+const jwt_config = require("./jwt_config");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const studentsRouter = require("./routes/students");
 const classesRouter = require("./routes/classes");
 const tokensRouter = require("./routes/tokens");
+const User = require("./models/user");
 
 debug("Configuring app server");
 
@@ -26,16 +29,40 @@ const accessLogStream = rfs.createStream("access.log", {
   path: path.join(__dirname, "log"),
 });
 
+// configure JWT authentication
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: jwt_config.secret,
+  issuer: jwt_config.options.issuer,
+  audience: jwt_config.options.audience,
+};
+const authenticationStrategy = new Strategy(
+  jwtOptions,
+  async (jwt_payload, done) => {
+    try {
+      const user = await User.findByPk(jwt_payload.sub);
+      if (user != null) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    } catch (error) {
+      return done(error);
+    }
+  }
+);
+passport.use(authenticationStrategy);
+
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(logger("dev"));
 app.use(logger("combined", { stream: accessLogStream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/students", studentsRouter);
 app.use("/classes", classesRouter);
 app.use("/tokens", tokensRouter);
