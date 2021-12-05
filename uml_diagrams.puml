@@ -39,3 +39,75 @@ EducationUnit "1" -- "0..*" Class
 Class "1" o-- "0..*" TeachingPeriod
 
 @enduml
+
+@startuml traditional_auth
+title Authentification traditionnelle
+database Cookies #LightSalmon
+participant Navigateur #LightSalmon
+participant Serveur
+collections Sessions
+database UserDB as "DB utilisateur"
+note over Serveur, UserDB
+Sur le ou les serveurs
+end note
+note over Cookies, Navigateur  #LightSalmon
+Sur l'ordinateur de l'utilisateur
+end note
+Navigateur -> Serveur : GET /login
+Serveur --> Navigateur : formulaire login
+Navigateur -> Serveur : POST /login + username + password
+Serveur -> UserDB : rechercher username
+UserDB --> Serveur : utilisateur
+Serveur -> Serveur : vérifier password
+alt password invalide
+  Serveur --> Navigateur : formulaire login + message d'erreur
+  ...
+else password OK
+  Serveur -> Sessions : créer nouvelle session
+  Sessions --> Serveur : session
+  Serveur --> Navigateur : cookie session + redirection vers /home
+  Navigateur -> Cookies : stocker cookie session
+  Navigateur -> Serveur : GET /home + cookie session
+  Serveur --> Navigateur : page web
+end
+...
+Navigateur -> Cookies : récupérer cookies
+Cookies --> Navigateur : cookie session
+Navigateur -> Serveur : GET /resource + cookie session
+Serveur -> Sessions : récupérer session
+Sessions --> Serveur : session
+Serveur --> Navigateur : page web
+@enduml
+
+@startuml api_auth
+title Authentification API
+database sessionStorage #LightSalmon
+participant JavaScript #LightSalmon
+participant Serveur
+database UserDB as "DB utilisateur"
+note over Serveur, UserDB
+Sur le ou les serveurs
+end note
+note over sessionStorage, JavaScript #LightSalmon
+Sur l'ordinateur de l'utilisateur
+end note
+JavaScript -> Serveur: POST /api/token/generate + username + password
+Serveur -> UserDB : rechercher username
+UserDB --> Serveur : utilisateur
+Serveur -> Serveur : vérifier password
+alt password invalide
+  Serveur --> JavaScript : 401 Unauthorized
+  ...
+else password OK
+  Serveur -> Serveur : générer + signer JWT
+  Serveur --> JavaScript : 200 OK + JWT
+  JavaScript -> sessionStorage : stocker JWT
+end
+...
+JavaScript -> sessionStorage : récupérer JWT
+sessionStorage --> JavaScript : JWT
+JavaScript -> Serveur : GET /api/blabla + JWT
+Serveur -> Serveur : vérifier signature JWT
+Serveur --> JavaScript: ressource demandée
+
+@enduml
