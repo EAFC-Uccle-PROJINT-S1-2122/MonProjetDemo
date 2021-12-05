@@ -12,14 +12,16 @@
 <body>
   <main class="container">
     <h1>Authentification</h1>
-    <form>
+    <form novalidate>
       <div class="mb-3">
         <label for="usernameInput" class="form-label">Nom d'utilisateur</label>
         <input type="text" name="username" id="usernameInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
       </div>
       <div class="mb-3">
         <label for="passwordInput" class="form-label">Mot de passe</label>
         <input type="password" name="password" id="passwordInput" class="form-control" required>
+        <div class="invalid-feedback">Ce champs est requis</div>
       </div>
       <div class="mb-3">
         <button type="submit" class="btn btn-primary">S'authentifier</button>

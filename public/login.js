@@ -9,25 +9,38 @@ function storeToken(token) {
 }
 
 function login(event) {
-  invalidCredsMsg.classList.replace("visible", "invisible");
   event.preventDefault();
   event.stopPropagation();
-  const loginData = {
-    username: usernameInput.value,
-    password: passwordInput.value,
-  };
-  const headers = new Headers();
-  headers.append("Content-Type", "application/json");
-  fetch("/tokens/generate", { method: "POST", body: JSON.stringify(loginData), headers: headers })
-    .then((response) => {
-      if (!response.ok) {
-        invalidCredsMsg.classList.replace("invisible", "visible");
-      }
-      return response.json()
+
+  if (!form.checkValidity()) {
+    form.classList.add("was-validated");
+  } else {
+    invalidCredsMsg.classList.replace("visible", "invisible");
+    usernameInput.setAttribute("disabled", "disabled");
+    passwordInput.setAttribute("disabled", "disabled");
+    const loginData = {
+      username: usernameInput.value,
+      password: passwordInput.value,
+    };
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    fetch("/tokens/generate", {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: headers,
     })
-    .then((data) => storeToken(data.token));
-
-
+      .then((response) => {
+        if (!response.ok) {
+          invalidCredsMsg.classList.replace("invisible", "visible");
+          form.classList.remove("was-validated");
+          usernameInput.removeAttribute("disabled", "disabled");
+          passwordInput.removeAttribute("disabled", "disabled");
+              } else {
+          return response.json();
+        }
+      })
+      .then((data) => storeToken(data.token));
+  }
 }
 
 form.addEventListener("submit", login);
