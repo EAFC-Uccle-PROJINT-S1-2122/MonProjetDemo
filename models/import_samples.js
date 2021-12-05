@@ -7,6 +7,8 @@ const {
   Teacher,
   TeachingPeriod,
 } = require("./schema");
+const { hash } = require("../password_hash");
+const argon2 = require("argon2");
 
 (async () => {
   debug("Recreating tables...");
@@ -40,14 +42,20 @@ const {
   });
 
   const mrsSonneville = await Teacher.create({
+    username: "vsonnevi",
+    passwordHash: await hash("sonneville"),
     firstName: "Véronique",
     lastName: "Sonneville",
   });
   const mrsDesmarets = await Teacher.create({
+    username: "kdesmare",
+    passwordHash: await hash("desmarets"),
     firstName: "Karin",
     lastName: "Desmarets",
   });
   const mrRoland = await Teacher.create({
+    username: "froland",
+    passwordHash: await hash("roland"),
     firstName: "François",
     lastName: "Roland",
   });

@@ -8,11 +8,20 @@ class Teacher extends Model {}
 
 Teacher.init(
   {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    passwordHash: {
       type: DataTypes.STRING,
       allowNull: false,
     },
