@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
   if (student !== null) {
     res.json(student);
   } else {
-    res.status(404).send("Student not found");
+    res.sendStatus(404);
   }
 });
 
@@ -39,7 +39,7 @@ router.get("/:id/classes", async (req, res, next) => {
     });
     res.json(studentClasses);
   } else {
-    res.status(404).send("Student not found");
+    res.sendStatus(404);
   }
 });
 
@@ -49,9 +49,9 @@ router.delete("/:id", async (req, res) => {
   const student = await Student.findByPk(studentId);
   if (student !== null) {
     await student.destroy();
-    res.status(204).send("Student deleted");
+    res.sendStatus(204);
   } else {
-    res.status(404).send("Student not found");
+    res.sendStatus(404);
   }
 });
 
