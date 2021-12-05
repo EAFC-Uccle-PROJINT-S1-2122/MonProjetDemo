@@ -8,6 +8,17 @@ function storeToken(token) {
   window.location.assign("/class_list.html");
 }
 
+function handleAuthenticationResponse(response) {
+  if (!response.ok) {
+    invalidCredsMsg.classList.replace("invisible", "visible");
+    form.classList.remove("was-validated");
+    usernameInput.removeAttribute("disabled", "disabled");
+    passwordInput.removeAttribute("disabled", "disabled");
+  } else {
+    return response.json();
+  }
+}
+
 function login(event) {
   event.preventDefault();
   event.stopPropagation();
@@ -29,18 +40,11 @@ function login(event) {
       body: JSON.stringify(loginData),
       headers: headers,
     })
-      .then((response) => {
-        if (!response.ok) {
-          invalidCredsMsg.classList.replace("invisible", "visible");
-          form.classList.remove("was-validated");
-          usernameInput.removeAttribute("disabled", "disabled");
-          passwordInput.removeAttribute("disabled", "disabled");
-              } else {
-          return response.json();
-        }
-      })
-      .then((data) => storeToken(data.token));
+      .then(handleAuthenticationResponse)
+      .then((data) => storeToken(data.token))
+      .catch((error) => console.log(error));
   }
 }
 
+window.sessionStorage.removeItem("token");
 form.addEventListener("submit", login);
