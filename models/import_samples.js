@@ -190,6 +190,16 @@ const { hash } = require("../password_hash");
 
   await plain_user.addRoles([user]);
 
+  const fakeStudents = [];
+  for (let i = 0; i < 50; i++) {
+    const fakeStudent = await Student.create({
+      firstName: `Student${i}`,
+      lastName: `Student${i}`,
+    });
+    fakeStudents.push(fakeStudent);
+  }
+  await projint_s1_2122.addStudents(fakeStudents);
+
   debug("Samples imported.");
 
   await sequelize.close();
