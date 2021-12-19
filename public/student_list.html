@@ -15,28 +15,34 @@
 
 <body>
   <div class="container">
-    <h1 class="display-1">Liste des étudiants</h1>
-    <p class="lead">Classe de <span id="classNamePlaceholder"></span></p>
-    <div id="loading" class="lead">En cours de chargement...</div>
-    <div id="noResults" class="lead d-none">Il n'y a pas d'inscrits dans cette classe.</div>
-    <div id="results" class="d-none">
-      <table class="table">
-        <caption></caption>
-        <thead>
-          <tr>
-            <th scope="col">Prénom</th>
-            <th scope="col">Nom</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="row justify-content-center align-items-center" id="paginationControls">
-        <button class="col-1 btn btn-outline-primary" id="previousButton">Précédent</button>
-        <div class="col-auto" id="paginationText"></div>
-        <button class="col-1 btn btn-outline-primary" id="nextButton">Suivant</button>
+    <div class="row">
+      <div class="col">&nbsp;</div>
+      <div class="col-sm-8">
+        <h1 class="display-1">Liste des étudiants</h1>
+        <p class="lead">Classe de <span id="classNamePlaceholder"></span></p>
+        <div id="loading" class="lead">En cours de chargement...</div>
+        <div id="noResults" class="lead d-none">Il n'y a pas d'inscrits dans cette classe.</div>
+        <div id="results" class="d-none">
+          <table class="table">
+            <caption></caption>
+            <thead>
+              <tr>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="row justify-content-center align-items-center" id="paginationControls">
+            <button class="col-auto btn btn-outline-primary" id="previousButton">Précédent</button>
+            <div class="col text-center" id="paginationText"></div>
+            <button class="col-auto btn btn-outline-primary" id="nextButton">Suivant</button>
+          </div>
+        </div>
+        <p class="my-5"><a href="/class_list.html">Retour à la liste des classes</a></p>
       </div>
+      <div class="col">&nbsp;</div>
     </div>
-    <p><a href="/class_list.html">Retour à la liste des classes</a></p>
   </div>
 
   <!-- Bootstrap Bundle with Popper -->
