@@ -5,20 +5,19 @@ function populateTable(classes) {
     const row = document.createElement("tr");
 
     const nameCol = document.createElement("td");
-    const nameTxt = document.createTextNode(c.shortName);
-    nameCol.appendChild(nameTxt);
+    const nameLink = document.createElement("a");
+    const nameLinkParams = new URLSearchParams({ class: c.id.toString(10) });
+    nameLink.href = `/student_list.html?${nameLinkParams.toString()}`;
+    nameLink.innerText = c.shortName;
+    nameCol.appendChild(nameLink);
     row.appendChild(nameCol);
 
     const euCol = document.createElement("td");
-    const euTxt = document.createTextNode(c.educationUnit.name);
-    euCol.appendChild(euTxt);
+    euCol.innerText = c.educationUnit.name;
     row.appendChild(euCol);
 
     const teacherCol = document.createElement("td");
-    const teacherTxt = document.createTextNode(
-      [c.teacher.firstName, c.teacher.lastName].join(" ")
-    );
-    teacherCol.appendChild(teacherTxt);
+    teacherCol.innerText = [c.teacher.firstName, c.teacher.lastName].join(" ");
     row.appendChild(teacherCol);
 
     return row;
@@ -30,8 +29,8 @@ function populateTable(classes) {
 const token = sessionStorage.getItem("token");
 fetch("/classes/", {
   headers: {
-    "Authorization": "Bearer " + token
-  }
+    Authorization: "Bearer " + token,
+  },
 })
   .then((response) => response.json())
   .then((classes) => populateTable(classes));
