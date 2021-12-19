@@ -1,3 +1,7 @@
+const token = sessionStorage.getItem("token");
+if (!token) {
+  location.assign("/login.html");
+}
 const classList = document.getElementById("classList");
 
 function populateTable(classes) {
@@ -26,7 +30,6 @@ function populateTable(classes) {
   tableBody.replaceChildren(...classRows);
 }
 
-const token = sessionStorage.getItem("token");
 fetch("/classes/", {
   headers: {
     Authorization: "Bearer " + token,

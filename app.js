@@ -21,7 +21,9 @@ jwt_passport_opts.issuer = jwt_options.issuer;
 jwt_passport_opts.audience = jwt_options.audience;
 passport.use(
   new JwtStrategy(jwt_passport_opts, async function (jwt_payload, done) {
-    const user = await User.findByPk(jwt_payload.sub);
+    const user = await User.findByPk(jwt_payload.sub, {
+      include: ["roles"],
+    });
     if (user != null) {
       return done(null, user);
     } else {

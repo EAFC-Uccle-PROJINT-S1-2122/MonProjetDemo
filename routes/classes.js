@@ -9,8 +9,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async function (req, res, next) {
     debug(`List classes [user ${req.user.username}]`);
-    const roles = await req.user.getRoles();
-    if (roles.find((role) => role.name === "admin")) {
+    if (req.user.roles.find((role) => role.name === "admin")) {
       const classes = await Class.findAll({
         include: [EducationUnit, Teacher],
       });
@@ -26,8 +25,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async function (req, res, next) {
     debug(`Get class ${req.params.class_id} [user ${req.user.username}]`);
-    const roles = await req.user.getRoles();
-    if (roles.find((role) => role.name === "admin")) {
+    if (req.user.roles.find((role) => role.name === "admin")) {
       const foundClass = await Class.findByPk(req.params.class_id, {
         include: ["teacher", "educationUnit"],
       });
@@ -45,8 +43,7 @@ router.get(
     debug(
       `Get students for class ${req.params.class_id} [user ${req.user.username}]`
     );
-    const roles = await req.user.getRoles();
-    if (roles.find((role) => role.name === "admin")) {
+    if (req.user.roles.find((role) => role.name === "admin")) {
       const studentList = await Student.findAndCountAll({
         include: [{ model: Class, where: { id: req.params.class_id } }],
         order: ["firstName", "lastName"],
