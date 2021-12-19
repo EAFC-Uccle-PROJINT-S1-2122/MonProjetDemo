@@ -48,9 +48,9 @@ function populateStudentsTable(students, offset, count) {
   const first = offset + 1;
   const last = offset + listSize;
   if (offset === 0 && listSize < PAGINATION_LIMIT) {
-    paginationControls.classList.add("invisible");
+    paginationControls.classList.add("d-none");
   } else {
-    paginationControls.classList.remove("invisible");
+    paginationControls.classList.remove("d-none");
   }
   previousButton.disabled = first === 1;
   nextButton.disabled = last === count;
@@ -66,13 +66,13 @@ function populateStudentsTable(students, offset, count) {
     return row;
   });
   studentsTableBody.replaceChildren(...rows);
-  loading.classList.add("invisible");
+  loading.classList.add("d-none");
   if (count === 0) {
-    noResults.classList.remove("invisible");
-    results.classList.add("invisible");
+    noResults.classList.remove("d-none");
+    results.classList.add("d-none");
   } else {
-    noResults.classList.add("invisible");
-    results.classList.remove("invisible");
+    noResults.classList.add("d-none");
+    results.classList.remove("d-none");
   }
 }
 
@@ -89,9 +89,9 @@ function fetchStudents(offset) {
     limit: PAGINATION_LIMIT.toString(10),
     offset: offset,
   });
-  loading.classList.remove("invisible");
-  results.classList.add("invisible");
-  paginationControls.classList.add("invisible");
+  loading.classList.remove("d-none");
+  results.classList.add("d-none");
+  paginationControls.classList.add("d-none");
   fetch(`/classes/${classId}/students?${params.toString()}`, {
     headers: {
       Authorization: "Bearer " + token,

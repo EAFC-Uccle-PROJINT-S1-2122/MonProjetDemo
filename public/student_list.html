@@ -17,10 +17,9 @@
   <div class="container">
     <h1 class="display-1">Liste des étudiants</h1>
     <p class="lead">Classe de <span id="classNamePlaceholder"></span></p>
-    <h2 class="display-2">Inscriptions</h2>
     <div id="loading" class="lead">En cours de chargement...</div>
-    <div id="noResults" class="lead invisible">Il n'y a pas d'inscrits dans cette classe.</div>
-    <div id="results" class="invisible">
+    <div id="noResults" class="lead d-none">Il n'y a pas d'inscrits dans cette classe.</div>
+    <div id="results" class="d-none">
       <table class="table">
         <caption></caption>
         <thead>
@@ -37,6 +36,7 @@
         <button class="col-1 btn btn-outline-primary" id="nextButton">Suivant</button>
       </div>
     </div>
+    <p><a href="/class_list.html">Retour à la liste des classes</a></p>
   </div>
 
   <!-- Bootstrap Bundle with Popper -->
